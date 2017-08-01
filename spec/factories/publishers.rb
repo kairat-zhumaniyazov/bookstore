@@ -10,6 +10,6 @@
 
 FactoryGirl.define do
   factory :publisher do
-    
+    name { Faker::Name.unique.name }
   end
 end
