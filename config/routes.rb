@@ -6,7 +6,7 @@ Rails.application.routes.draw do
       end
 
       resources :stores, only: [] do
-        get '/sold_books', to: 'stores#sold_books', on: :member
+        get '/books_sold', to: 'stores#books_sold', on: :member
       end
     end
   end
