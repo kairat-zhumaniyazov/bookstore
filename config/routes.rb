@@ -1,3 +1,13 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  namespace :api, defaults: { format: 'json' } do
+    namespace :v1 do
+      resources :publisher, only: [] do
+        get '/in_stores', to: 'publishers#in_stores', on: :member
+      end
+
+      resources :stores, only: [] do
+        get '/books_sold', to: 'stores#books_sold', on: :member
+      end
+    end
+  end
 end
