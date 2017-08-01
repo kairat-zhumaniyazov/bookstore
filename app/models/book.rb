@@ -11,6 +11,8 @@
 
 class Book < ApplicationRecord
   belongs_to :publisher
+  has_many :stocks, dependent: :destroy
+  has_many :stores, through: :stocks
 
   validates :title, presence: true
 end
