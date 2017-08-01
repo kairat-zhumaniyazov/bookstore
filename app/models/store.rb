@@ -13,4 +13,6 @@ class Store < ApplicationRecord
   has_many :books, through: :stocks
 
   validates :name, presence: true
+
+  scope :with_available_books, -> { joins(:stocks).where('stocks.amount > 0').uniq }
 end
