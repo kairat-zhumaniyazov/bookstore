@@ -17,8 +17,10 @@ RSpec.describe Store, type: :model do
   it { should have_many(:books).through(:stocks) }
 
   describe 'scopes' do
+    include_context 'books_and_stores'
+
     context 'with available books' do
-      include_context 'books_and_stores'
+      subject { Store.with_available_books_for_publisher(publisher) }
 
       it { expect(subject.count).to eq 2 }
       it { expect(subject).to include(store_1) }
