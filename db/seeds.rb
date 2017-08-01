@@ -1,7 +1,23 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+@publisher_1 = Publisher.create! name: Faker::Name.unique.name
+@publisher_2 = Publisher.create! name: Faker::Name.unique.name
+@publisher_3 = Publisher.create! name: Faker::Name.unique.name
+
+@book_1 = Book.create! title: Faker::Book.title, publisher: @publisher_1
+@book_2 = Book.create! title: Faker::Book.title, publisher: @publisher_1
+@book_3 = Book.create! title: Faker::Book.title, publisher: @publisher_2
+
+@store_1 = Store.create! name: Faker::Company.name
+@store_2 = Store.create! name: Faker::Company.name
+@store_3 = Store.create! name: Faker::Company.name
+
+Stock.create! store: @store_1, book: @book_1, amount: 2
+Stock.create! store: @store_2, book: @book_1, amount: 0
+Stock.create! store: @store_3, book: @book_1, amount: 0
+
+Stock.create! store: @store_1, book: @book_2, amount: 0
+Stock.create! store: @store_2, book: @book_2, amount: 1
+Stock.create! store: @store_3, book: @book_2, amount: 0
+
+Stock.create! store: @store_1, book: @book_3, amount: 0
+Stock.create! store: @store_2, book: @book_3, amount: 1
+Stock.create! store: @store_3, book: @book_3, amount: 2
