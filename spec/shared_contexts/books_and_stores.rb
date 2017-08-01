@@ -10,8 +10,6 @@ shared_context 'books_and_stores' do
   let(:store_2) { create :store }
   let(:store_3) { create :store }
 
-  subject { Store.with_available_books_for_publisher(publisher) }
-
   before do
     Stock.create store: store_1, book: book_1, amount: 2
     Stock.create store: store_2, book: book_1, amount: 0

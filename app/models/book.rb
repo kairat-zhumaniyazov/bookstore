@@ -15,4 +15,6 @@ class Book < ApplicationRecord
   has_many :stores, through: :stocks
 
   validates :title, presence: true
+
+  scope :sold, -> { where('stocks.amount = 0') }
 end

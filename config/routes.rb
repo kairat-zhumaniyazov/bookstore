@@ -4,6 +4,10 @@ Rails.application.routes.draw do
       resources :publisher, only: [] do
         get '/in_stores', to: 'publishers#in_stores', on: :member
       end
+
+      resources :stores, only: [] do
+        get '/books_sold', to: 'stores#books_sold', on: :member
+      end
     end
   end
 end
