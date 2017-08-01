@@ -13,4 +13,11 @@ class Store < ApplicationRecord
   has_many :books, through: :stocks
 
   validates :name, presence: true
+
+  scope :with_available_books_for_publisher, -> (publisher) {
+    joins(
+      'INNER JOIN stocks ON stocks.store_id = stores.id AND stocks.amount > 0',
+      "INNER JOIN books ON books.id = stocks.book_id AND books.publisher_id = #{publisher.id}"
+    )
+  }
 end
