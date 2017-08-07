@@ -11,10 +11,6 @@ class Api::V1::StoresController < ApiController
     respond_with @store.books.sold, each_serializer: BookSerializer
   end
 
-  def handle_not_found
-    respond_with e.to_s, status: :not_found
-  end
-
   private
 
   def load_publisher
