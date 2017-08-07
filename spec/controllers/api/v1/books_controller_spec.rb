@@ -41,6 +41,11 @@ RSpec.describe Api::V1::BooksController, type: :controller do
       include_examples 'API :post status created'
 
       it { expect{ subject }.to change(publisher.books, :count).by(1) }
+
+      it 'should return json' do
+        subject
+        expect(json['attributes']['title']).to eq 'Book title'
+      end
     end
 
     context 'with invalid params' do

@@ -81,6 +81,11 @@ RSpec.describe Api::V1::StoresController, type: :controller do
       include_examples 'API :post status created'
 
       it { expect{ subject }.to change(Store, :count).by(1) }
+
+      it 'should return json' do
+        subject
+        expect(json['attributes']['name']).to eq 'Store name'
+      end
     end
 
     context 'with invalid params' do

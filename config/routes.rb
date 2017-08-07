@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       resources :stores, except: :new do
         get '/publisher_books', to: 'stores#publisher_books', on: :collection
         get '/books_sold', to: 'stores#books_sold', on: :member
+        post '/add_book/:book_id', to: 'stores#add_book', on: :member
       end
     end
   end
