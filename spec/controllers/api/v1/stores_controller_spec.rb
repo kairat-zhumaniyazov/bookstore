@@ -139,4 +139,17 @@ RSpec.describe Api::V1::StoresController, type: :controller do
       it { expect{ subject }.to_not change(Store, :count) }
     end
   end
+
+  describe 'POST #add_book' do
+    let!(:book) { create :book }
+    let!(:store) { create :store }
+
+    subject { post :add_book, params: { id: book.id, book_id: book.id, amount: 20, format: :json } }
+
+    it { expect{ subject }.to change{ store.books.count }.by(1) }
+    it 'should right books amount' do
+      subject
+      expect(store.stocks.first.amount).to eq 20
+    end
+  end
 end

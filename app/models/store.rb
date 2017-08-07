@@ -20,4 +20,9 @@ class Store < ApplicationRecord
       "INNER JOIN books ON books.id = stocks.book_id AND books.publisher_id = #{publisher.id}"
     )
   }
+
+  def add_stock(params)
+    book = Book.find(params[:book_id]) rescue nil
+    stocks.create(book_id: book.id, amount: params[:amount]) if book.present?
+  end
 end
