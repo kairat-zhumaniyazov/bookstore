@@ -71,6 +71,11 @@ RSpec.describe Api::V1::BooksController, type: :controller do
       let(:params) { { id: book.id, book: { title: 'Updated title' }, format: :json } }
 
       it { expect{ subject }.to change{ book.reload.title }.to('Updated title') }
+
+      it 'should return json' do
+        subject
+        expect(json['attributes']['title']).to eq 'Updated title'
+      end
     end
 
     context 'with invalid params' do

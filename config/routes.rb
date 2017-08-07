@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :books, except: :new
 
-      resources :stores, only: [] do
+      resources :stores, except: :new do
         get '/publisher_books', to: 'stores#publisher_books', on: :collection
         get '/books_sold', to: 'stores#books_sold', on: :member
       end
