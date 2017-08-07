@@ -2,8 +2,6 @@ class Api::V1::StoresController < ApiController
   before_action :load_publisher, only: :publisher_books
   before_action :load_store, only: :books_sold
 
-  respond_to :json
-
   def publisher_books
     @stores = Store.with_available_books_for_publisher(@publisher)
     respond_with @stores, each_serializer: StoresSerializer
