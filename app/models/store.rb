@@ -31,5 +31,7 @@ class Store < ApplicationRecord
     temp.errors.full_messages.each do |msg|
       errors.add(:base, "Stock error: #{msg}")
     end
+
+    false
   end
 end
