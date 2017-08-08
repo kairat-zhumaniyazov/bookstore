@@ -26,6 +26,8 @@ class Store < ApplicationRecord
 
     temp = stocks.create(book: book, amount: params[:amount])
 
+    return true if temp.errors.empty?
+
     temp.errors.full_messages.each do |msg|
       errors.add(:base, "Stock error: #{msg}")
     end
