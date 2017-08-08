@@ -17,6 +17,6 @@ class Api::V1::BooksController < ApiController
   def load_publisher
     @publisher = Publisher.find(params[:publisher_id])
   rescue ActiveRecord::RecordNotFound => e
-    render json: e.to_s, status: :not_found
+    respond_not_found(e)
   end
 end
