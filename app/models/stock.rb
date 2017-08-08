@@ -14,5 +14,5 @@ class Stock < ApplicationRecord
   belongs_to :store
   belongs_to :book
 
-  validates :amount, presence: true
+  validates :amount, numericality: { only_integer: true }
 end

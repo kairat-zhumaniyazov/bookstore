@@ -23,6 +23,11 @@ class Store < ApplicationRecord
 
   def add_stock(params)
     book = Book.find(params[:book_id]) rescue nil
-    stocks.create(book_id: book.id, amount: params[:amount]) if book.present?
+
+    temp = stocks.create(book: book, amount: params[:amount])
+
+    temp.errors.full_messages.each do |msg|
+      errors.add(:base, "Stock error: #{msg}")
+    end
   end
 end

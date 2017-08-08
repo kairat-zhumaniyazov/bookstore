@@ -144,12 +144,26 @@ RSpec.describe Api::V1::StoresController, type: :controller do
     let!(:book) { create :book }
     let!(:store) { create :store }
 
-    subject { post :add_book, params: { id: book.id, book_id: book.id, amount: 20, format: :json } }
+    subject { post :add_book, params: params }
 
-    it { expect{ subject }.to change{ store.books.count }.by(1) }
-    it 'should right books amount' do
-      subject
-      expect(store.stocks.first.amount).to eq 20
+    context 'with valid params ' do
+      let(:params) { { id: store.id, book_id: book.id, amount: 20, format: :json } }
+
+      it { expect{ subject }.to change{ store.books.count }.by(1) }
+      it 'should right books amount' do
+        subject
+        expect(store.stocks.first.amount).to eq 20
+      end
+    end
+
+    context 'with ivalid params' do
+      let(:params) { { id: store.id, book_id: nil, amount: nil, format: :json } }
+
+      it { expect{ subject }.to_not change(Stock, :count) }
+      it 'should have error' do
+        subject
+        expect(JSON.parse(response.body)['errors']['base']).to eq ["Stock error: Book must exist", "Stock error: Amount is not a number"]
+      end
     end
   end
 end

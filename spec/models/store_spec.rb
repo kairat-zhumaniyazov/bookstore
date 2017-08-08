@@ -44,7 +44,7 @@ RSpec.describe Store, type: :model do
     context 'with invalid params' do
       let(:params) { { book_id: 12312312 } }
 
-      it { expect{ subject }.to_not change{ store.books.count } }
+      it { expect{ subject }.to_not change(Stock, :count) }
     end
   end
 end
