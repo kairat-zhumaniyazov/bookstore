@@ -15,5 +15,5 @@ require 'rails_helper'
 RSpec.describe Stock, type: :model do
   it { should belong_to :store }
   it { should belong_to :book }
-  it { should validate_presence_of :amount }
+  it { should validate_numericality_of :amount }
 end

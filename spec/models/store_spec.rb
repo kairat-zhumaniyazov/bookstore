@@ -28,4 +28,23 @@ RSpec.describe Store, type: :model do
       it { expect(subject).to_not include(store_3) }
     end
   end
+
+  describe '#add_stock' do
+    let!(:store) { create :store }
+    let!(:book) { create :book }
+
+    subject { store.add_stock(params) }
+
+    context 'with valid params' do
+      let(:params) { { book_id: book.id, amount: 10 } }
+
+      it { expect{ subject }.to change{ store.books.count }.by(1) }
+    end
+
+    context 'with invalid params' do
+      let(:params) { { book_id: 12312312 } }
+
+      it { expect{ subject }.to_not change(Stock, :count) }
+    end
+  end
 end
